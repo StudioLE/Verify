@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Description>Visualise and verify the results of Elements logic.</Description>
+  </PropertyGroup>
+
+  <!-- Use consistent properties across all src projects -->
+  <Import Project="..\..\GlobalProperties.src.props" />
+
+  <!-- Use consistent global usings across all src projects -->
+  <Import Project="..\..\GlobalUsings.src.props" />
+
+  <ItemGroup>
+    <PackageReference Include="CsvHelper" Version="28.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="StudioLE.Core" Version="0.3.0-develop.2" />
+  </ItemGroup>
+
+</Project>

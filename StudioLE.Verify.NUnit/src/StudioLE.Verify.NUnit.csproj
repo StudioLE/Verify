@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Description>Visualise and verify the results of Elements logic in NUnit tests.</Description>
+  </PropertyGroup>
+
+  <!-- Use consistent properties across all src projects -->
+  <Import Project="..\..\GlobalProperties.src.props" />
+
+  <!-- Use consistent global usings across all src projects -->
+  <Import Project="..\..\GlobalUsings.src.props" />
+
+  <ItemGroup>
+    <PackageReference Include="DiffEngine" Version="9.0.6" />
+    <PackageReference Include="NUnit" Version="3.13.3" />
+    <PackageReference Include="NUnit.Engine" Version="3.15.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\StudioLE.Verify\src\StudioLE.Verify.csproj" />
+  </ItemGroup>
+
+</Project>
