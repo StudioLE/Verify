@@ -63,7 +63,9 @@ public class NUnitVerifyContext : IVerifyContext
     {
         if (result is Success)
             return;
-        if (AssemblyHelpers.IsDebugBuild())
+        ITest test = GetTest(TestContext.CurrentContext);
+        Assembly testAssembly = test.TypeInfo?.Type.Assembly ?? throw new("Failed to get assembly");
+        if (testAssembly.IsDebugBuild())
             DiffRunner.LaunchAsync(receivedFile.FullName, verifiedFile.FullName);
         Assert.Fail(result.Errors.Prepend("Actual results did not match the verified results:").Join());
     }

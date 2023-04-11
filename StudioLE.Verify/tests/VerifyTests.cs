@@ -50,4 +50,17 @@ internal sealed class VerifyTests
         // Assert
         await _verify.String(actual);
     }
+
+    [Test]
+    [Explicit("Intentionally failing")]
+    public async Task Verify_String_Fail()
+    {
+        // Arrange
+        string expected = "Hello, world!";
+        string actual = "Hmm, this isn't correct.";
+
+        // Act
+        // Assert
+        await _verify.String(expected, actual);
+    }
 }
