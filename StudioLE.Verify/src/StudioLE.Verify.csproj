@@ -15,7 +15,7 @@
     <PackageReference Include="CsvHelper" Version="28.0.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="StudioLE.Core" Version="0.3.0-develop.3" />
+    <PackageReference Include="StudioLE.Core" Version="0.3.0" />
   </ItemGroup>
 
 </Project>
