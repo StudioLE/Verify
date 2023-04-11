@@ -4,7 +4,7 @@ on:
   push:
   pull_request:
     branches:
-      - develop
+      - alpha
 
 jobs:
 
@@ -35,7 +35,7 @@ jobs:
 
   publish-nuget:
     name: Publish NuGet
-    if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop' }}
+    if: ${{ contains(fromJSON('["refs/heads/main", "refs/heads/alpha", "refs/heads/beta"]'), github.ref) }}
     needs:
       - analysis
       - build-and-test-ubuntu
