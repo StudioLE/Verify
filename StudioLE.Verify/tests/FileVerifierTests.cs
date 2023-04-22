@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using StudioLE.Core.Results;
 using StudioLE.Core.System;
 using StudioLE.Verify.Tests.Mock;

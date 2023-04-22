@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using NUnit.Framework;
 using StudioLE.Verify.NUnit;
 using StudioLE.Verify.Tests.Mock;
 

@@ -1,0 +1,43 @@
+﻿<Project>
+
+  <PropertyGroup>
+    <Authors>StudioLE</Authors>
+    <Copyright>Copyright © Laurence Elsdon 2023</Copyright>
+    <PackageProjectUrl>https://github.com/StudioLE/Verify</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>verify test helper helpers nunit testing tdd</PackageTags>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <!--    <GenerateDocumentationFile>true</GenerateDocumentationFile>-->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="../../README.md" Pack="true" PackagePath="\" Visible="false"/>
+  </ItemGroup>
+
+  <Choose>
+    <!-- If non-test library -->
+    <When Condition="'$(OutputType)' == 'Library' AND ! $(MSBuildProjectName.EndsWith('.Tests'))">
+      <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <IsPackable>true</IsPackable>
+      </PropertyGroup>
+
+      <ItemGroup>
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All"/>
+      </ItemGroup>
+    </When>
+
+    <!-- If test library -->
+    <When Condition="'$(OutputType)' == 'Library' AND $(MSBuildProjectName.EndsWith('.Tests'))">
+      <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+      </PropertyGroup>
+    </When>
+  </Choose>
+
+</Project>
