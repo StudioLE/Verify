@@ -20,7 +20,7 @@ public static class VerifyHelpers
     /// <summary>
     /// Verify <paramref name="actual"/> as YAML.
     /// </summary>
-    public static async Task AsJson(this IVerify verify, object expected, object actual)
+    public static async Task AsYaml(this IVerify verify, object expected, object actual)
     {
         YamlVerifier verifier = new();
         IResult result = await verify.Execute(verifier, expected, actual, ".yaml");
