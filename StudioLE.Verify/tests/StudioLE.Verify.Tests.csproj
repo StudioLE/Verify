@@ -6,6 +6,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\StudioLE.Verify.Json\src\StudioLE.Verify.Json.csproj" />
     <ProjectReference Include="..\..\StudioLE.Verify.NUnit\src\StudioLE.Verify.NUnit.csproj" />
+    <ProjectReference Include="..\..\StudioLE.Verify.Yaml\src\StudioLE.Verify.Yaml.csproj" />
     <ProjectReference Include="..\src\StudioLE.Verify.csproj" />
   </ItemGroup>
 

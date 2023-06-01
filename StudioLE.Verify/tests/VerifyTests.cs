@@ -1,8 +1,8 @@
-using Newtonsoft.Json;
 using NUnit.Framework;
 using StudioLE.Verify.Json;
 using StudioLE.Verify.NUnit;
 using StudioLE.Verify.Tests.Mock;
+using StudioLE.Verify.Yaml;
 
 namespace StudioLE.Verify.Tests;
 
@@ -33,6 +33,17 @@ internal sealed class VerifyTests
         // Act
         // Assert
         await _verify.AsJson(sample);
+    }
+
+    [Test]
+    public async Task Verify_AsYaml()
+    {
+        // Arrange
+        BBox3[] sample = SampleHelpers.GetValidSample();
+
+        // Act
+        // Assert
+        await _verify.AsYaml(sample);
     }
 
     [Test]
