@@ -15,6 +15,9 @@ public sealed class JsonVerifier : IVerifier<object>
         new DoubleConverter(DecimalPlaces)
     };
 
+    /// <inheritdoc />
+    public string FileExtension => ".json";
+
     /// <inheritdoc/>
     public IDiffer Differ => new StringDiffer();
 

@@ -16,11 +16,10 @@ public static class VerifyHelpers
     public static async Task<IResult> Execute<T>(
         this IVerify verify,
         IVerifier<T> verifier,
-        T actual,
-        string fileExtension = ".txt")
+        T actual)
     {
-        string receivedPath = verify.GetFilePath(".received" + fileExtension);
-        string verifiedPath = verify.GetFilePath(".verified" + fileExtension);
+        string receivedPath = verify.GetFilePath(".received" + verifier.FileExtension);
+        string verifiedPath = verify.GetFilePath(".verified" + verifier.FileExtension);
         await verifier.Writer.Write(receivedPath, actual);
         VerifyFile[] files =
         {
@@ -39,11 +38,10 @@ public static class VerifyHelpers
         this IVerify verify,
         IVerifier<T> verifier,
         T expected,
-        T actual,
-        string fileExtension = ".txt")
+        T actual)
     {
-        string expectedPath = Path.GetTempFileName() + ".expected" + fileExtension;
-        string actualPath = Path.GetTempFileName() + ".actual" + fileExtension;
+        string expectedPath = Path.GetTempFileName() + ".expected" + verifier.FileExtension;
+        string actualPath = Path.GetTempFileName() + ".actual" + verifier.FileExtension;
         await verifier.Writer.Write(expectedPath, expected);
         await verifier.Writer.Write(actualPath, actual);
         VerifyFile[] files =
@@ -79,7 +77,10 @@ public static class VerifyHelpers
     /// </summary>
     public static async Task File(this IVerify verify, FileInfo actual)
     {
-        FileVerifier verifier = new();
-        IResult result = await verify.Execute(verifier, actual, actual.Extension);
+        FileVerifier verifier = new()
+        {
+            FileExtension = actual.Extension
+        };
+        IResult result = await verify.Execute(verifier, actual);
     }
 }

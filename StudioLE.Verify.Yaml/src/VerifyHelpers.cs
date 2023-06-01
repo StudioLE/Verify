@@ -14,7 +14,7 @@ public static class VerifyHelpers
     public static async Task AsYaml(this IVerify verify, object actual)
     {
         YamlVerifier verifier = new();
-        IResult result = await verify.Execute(verifier, actual, ".yaml");
+        IResult result = await verify.Execute(verifier, actual);
     }
 
     /// <summary>
@@ -23,6 +23,6 @@ public static class VerifyHelpers
     public static async Task AsYaml(this IVerify verify, object expected, object actual)
     {
         YamlVerifier verifier = new();
-        IResult result = await verify.Execute(verifier, expected, actual, ".yaml");
+        IResult result = await verify.Execute(verifier, expected, actual);
     }
 }

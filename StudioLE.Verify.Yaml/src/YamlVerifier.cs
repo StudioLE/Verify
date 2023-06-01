@@ -6,6 +6,9 @@ namespace StudioLE.Verify.Yaml;
 /// <inheritdoc cref="IVerifier{T}"/>
 public sealed class YamlVerifier : IVerifier<object>
 {
+    /// <inheritdoc />
+    public string FileExtension => ".yaml";
+
     /// <inheritdoc/>
     public IDiffer Differ => new StringDiffer();
 

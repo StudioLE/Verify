@@ -17,7 +17,7 @@ internal sealed class YamlVerifierTests
         YamlVerifier verifier = new();
 
         // Act
-        IResult result = await verify.Execute(verifier, actual, ".yaml");
+        IResult result = await verify.Execute(verifier, actual);
         if (result.Errors.Any())
             Console.WriteLine(result.Errors.Join());
 
@@ -35,7 +35,7 @@ internal sealed class YamlVerifierTests
         YamlVerifier verifier = new();
 
         // Act
-        IResult result = await verify.Execute(verifier, actual, ".yaml");
+        IResult result = await verify.Execute(verifier, actual);
         if (result.Errors.Any())
             Console.WriteLine(result.Errors.Join());
 

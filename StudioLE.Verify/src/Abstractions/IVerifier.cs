@@ -8,6 +8,8 @@ namespace StudioLE.Verify.Abstractions;
 /// </remarks>
 public interface IVerifier<in TValue>
 {
+    public string FileExtension { get; }
+
     public IDiffer Differ { get; }
 
     public IFileWriter<TValue> Writer { get; }

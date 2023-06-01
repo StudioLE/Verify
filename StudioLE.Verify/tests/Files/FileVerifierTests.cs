@@ -16,10 +16,13 @@ internal sealed class FileVerifierTests
         // Arrange
         MockVerify verify = new("FileVerifier_Pass");
         FileInfo file = verify.GetSourceFile(fileExtension);
-        FileVerifier verifier = new();
+        FileVerifier verifier = new()
+        {
+            FileExtension = fileExtension
+        };
 
         // Act
-        IResult result = await verify.Execute(verifier, file, fileExtension);
+        IResult result = await verify.Execute(verifier, file);
         if (result.Errors.Any())
             Console.WriteLine(result.Errors.Join());
 
@@ -36,10 +39,13 @@ internal sealed class FileVerifierTests
         // Arrange
         MockVerify verify = new("FileVerifier_Fail");
         FileInfo file = verify.GetSourceFile(fileExtension);
-        FileVerifier verifier = new();
+        FileVerifier verifier = new()
+        {
+            FileExtension = fileExtension
+        };
 
         // Act
-        IResult result = await verify.Execute(verifier, file, fileExtension);
+        IResult result = await verify.Execute(verifier, file);
         if (result.Errors.Any())
             Console.WriteLine(result.Errors.Join());
 
