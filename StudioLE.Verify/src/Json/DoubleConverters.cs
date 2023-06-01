@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace StudioLE.Verify.Converters;
+namespace StudioLE.Verify.Json;
 
 /// <see href="https://stackoverflow.com/a/55971248/247218"/>
 internal class DoubleConverter : JsonConverter

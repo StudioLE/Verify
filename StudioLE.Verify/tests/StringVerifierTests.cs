@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using StudioLE.Core.Results;
 using StudioLE.Core.System;
+using StudioLE.Verify.Strings;
 using StudioLE.Verify.Tests.Mock;
 
 namespace StudioLE.Verify.Tests;
@@ -11,12 +12,12 @@ internal sealed class StringVerifierTests
     public async Task StringVerifier_IsValid()
     {
         // Arrange
-        MockVerifyContext context = new("StringVerifier_Pass");
-        StringVerifier verifier = new(context, ".txt");
-        string actual = context.ReadSourceFile(".txt");
+        MockVerify verify = new("StringVerifier_Pass");
+        StringVerifier verifier = new();
+        string actual = verify.ReadSourceFile(".txt");
 
         // Act
-        IResult result = await verifier.Execute(actual);
+        IResult result = await verify.Execute(verifier, actual);
         if (result.Errors.Any())
             Console.WriteLine(result.Errors.Join());
 
@@ -29,12 +30,12 @@ internal sealed class StringVerifierTests
     public async Task StringVerifier_IsInvalid()
     {
         // Arrange
-        MockVerifyContext context = new("StringVerifier_Fail");
-        StringVerifier verifier = new(context, ".txt");
-        string actual = context.ReadSourceFile(".txt");
+        MockVerify verify = new("StringVerifier_Fail");
+        StringVerifier verifier = new();
+        string actual = verify.ReadSourceFile(".txt");
 
         // Act
-        IResult result = await verifier.Execute(actual);
+        IResult result = await verify.Execute(verifier, actual);
         if (result.Errors.Any())
             Console.WriteLine(result.Errors.Join());
 

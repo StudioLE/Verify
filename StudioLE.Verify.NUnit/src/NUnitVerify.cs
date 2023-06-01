@@ -17,61 +17,34 @@ using StudioLE.Core.System;
 namespace StudioLE.Verify.NUnit;
 
 /// <summary>
-/// The NUnit specific <see cref="IVerifyContext"/>.
+/// The NUnit specific <see cref="IVerify"/>.
 /// </summary>
-public class NUnitVerifyContext : IVerifyContext
+public class NUnitVerify : IVerify
 {
-    private string? _fileNamePrefix;
-    private DirectoryInfo? _directory;
-
     /// <inheritdoc/>
-    public string FileNamePrefix
+    public string GetFilePath(string suffix)
     {
-        get
-        {
-            if(_fileNamePrefix is null)
-                Setup();
-            return _fileNamePrefix!;
-        }
+        string directory = Path.Combine(TestContext.CurrentContext.TestDirectory, "..", "..", "..", "Verify");
+        directory = Path.GetFullPath(directory);
+        string prefix = BuildFileNamePrefix(TestContext.CurrentContext);
+        string path = Path.Combine(directory, prefix + suffix);
+        return path;
     }
 
     /// <inheritdoc/>
-    public DirectoryInfo Directory
-    {
-        get
-        {
-            if(_directory is null)
-                Setup();
-            return _directory!;
-        }
-    }
-
-    public void Setup()
-    {
-        _fileNamePrefix = BuildFileNamePrefix(TestContext.CurrentContext);
-        _directory = new(Path.Combine(TestContext.CurrentContext.TestDirectory, "..", "..", "..", "Verify"));
-    }
-
-    public void Reset()
-    {
-        _fileNamePrefix = null;
-        _directory = null;
-    }
-
-    /// <inheritdoc/>
-    public void OnResult(IResult result, FileInfo receivedFile, FileInfo verifiedFile)
+    public void OnResult(IResult result, string actualPath, string expectedPath)
     {
         if (result is Success)
             return;
         ITest test = GetTest(TestContext.CurrentContext);
         Assembly testAssembly = test.TypeInfo?.Type.Assembly ?? throw new("Failed to get assembly");
         if (testAssembly.IsDebugBuild())
-            DiffRunner.LaunchAsync(receivedFile.FullName, verifiedFile.FullName);
+            DiffRunner.LaunchAsync(actualPath, expectedPath);
         Assert.Fail(result.Errors.Prepend("Actual results did not match the verified results:").Join());
     }
 
     /// <summary>
-    /// Determine the filename prefix to use for the <see cref="Verify"/> files.
+    /// Determine the filename prefix to use for the <see cref="VerifyHelpers"/> files.
     /// </summary>
     private static string BuildFileNamePrefix(TestContext context)
     {

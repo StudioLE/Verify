@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using StudioLE.Core.Results;
 using StudioLE.Core.System;
+using StudioLE.Verify.Files;
 using StudioLE.Verify.Tests.Mock;
 
 namespace StudioLE.Verify.Tests;
@@ -13,12 +14,12 @@ internal sealed class FileVerifierTests
     public async Task FileVerifier_IsValid(string fileExtension)
     {
         // Arrange
-        MockVerifyContext context = new("FileVerifier_Pass");
-        FileInfo file = context.GetSourceFile(fileExtension);
-        FileVerifier verifier = new(context, fileExtension);
+        MockVerify verify = new("FileVerifier_Pass");
+        FileInfo file = verify.GetSourceFile(fileExtension);
+        FileVerifier verifier = new();
 
         // Act
-        IResult result = await verifier.Execute(file);
+        IResult result = await verify.Execute(verifier, file, fileExtension);
         if (result.Errors.Any())
             Console.WriteLine(result.Errors.Join());
 
@@ -33,12 +34,12 @@ internal sealed class FileVerifierTests
     public async Task FileVerifier_IsInvalid(string fileExtension)
     {
         // Arrange
-        MockVerifyContext context = new("FileVerifier_Fail");
-        FileInfo file = context.GetSourceFile(fileExtension);
-        FileVerifier verifier = new(context, fileExtension);
+        MockVerify verify = new("FileVerifier_Fail");
+        FileInfo file = verify.GetSourceFile(fileExtension);
+        FileVerifier verifier = new();
 
         // Act
-        IResult result = await verifier.Execute(file);
+        IResult result = await verify.Execute(verifier, file, fileExtension);
         if (result.Errors.Any())
             Console.WriteLine(result.Errors.Join());
 

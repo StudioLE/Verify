@@ -1,4 +1,4 @@
-﻿namespace StudioLE.Verify.Comparers;
+﻿namespace StudioLE.Verify.Json;
 
 /// <summary>
 /// Compare the <typeparamref name="TValue"/>.

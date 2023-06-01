@@ -2,6 +2,7 @@ using Newtonsoft.Json;
 using NUnit.Framework;
 using StudioLE.Core.Results;
 using StudioLE.Core.System;
+using StudioLE.Verify.Json;
 using StudioLE.Verify.Tests.Mock;
 
 namespace StudioLE.Verify.Tests;
@@ -12,15 +13,15 @@ internal sealed class JsonVerifierTests
     public async Task JsonVerifier_IsValid()
     {
         // Arrange
-        MockVerifyContext context = new("JsonVerifier_Pass");
-        JsonVerifier verifier = new(context);
-        string actualJson = context.ReadSourceFile(".json");
+        MockVerify verify = new("JsonVerifier_Pass");
+        JsonVerifier verifier = new();
+        string actualJson = verify.ReadSourceFile(".json");
 
         // Act
         BBox3[]? actual = JsonConvert.DeserializeObject<BBox3[]>(actualJson, JsonVerifier.Converters);
         if (actual is null)
             throw new("Failed to de-serialize.");
-        IResult result = await verifier.Execute(actual);
+        IResult result = await verify.Execute(verifier, actual, ".json");
         if (result.Errors.Any())
             Console.WriteLine(result.Errors.Join());
 
@@ -33,15 +34,15 @@ internal sealed class JsonVerifierTests
     public async Task JsonVerifier_IsInvalid()
     {
         // Arrange
-        MockVerifyContext context = new("JsonVerifier_Fail");
-        JsonVerifier verifier = new(context);
-        string actualJson = context.ReadSourceFile(".json");
+        MockVerify verify = new("JsonVerifier_Fail");
+        JsonVerifier verifier = new();
+        string actualJson = verify.ReadSourceFile(".json");
 
         // Act
         BBox3[]? actual = JsonConvert.DeserializeObject<BBox3[]>(actualJson, JsonVerifier.Converters);
         if (actual is null)
             throw new("Failed to de-serialize.");
-        IResult result = await verifier.Execute(actual);
+        IResult result = await verify.Execute(verifier, actual, ".json");
         if (result.Errors.Any())
             Console.WriteLine(result.Errors.Join());
 

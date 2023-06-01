@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using NUnit.Framework;
+using StudioLE.Verify.Json;
 using StudioLE.Verify.NUnit;
 using StudioLE.Verify.Tests.Mock;
 
@@ -7,7 +8,7 @@ namespace StudioLE.Verify.Tests;
 
 internal sealed class VerifyTests
 {
-    private readonly Verify _verify = new(new NUnitVerifyContext());
+    private readonly IVerify _verify = new NUnitVerify();
 
     [TestCase(".txt")]
     [TestCase(".pdf")]
@@ -15,7 +16,7 @@ internal sealed class VerifyTests
     public async Task Verify_File(string fileExtension)
     {
         // Arrange
-        MockVerifyContext context = new("FileVerifier_Pass");
+        MockVerify context = new("FileVerifier_Pass");
         FileInfo file = context.GetSourceFile(fileExtension);
 
         // Act
@@ -27,7 +28,7 @@ internal sealed class VerifyTests
     public async Task Verify_AsJson()
     {
         // Arrange
-        MockVerifyContext context = new("JsonVerifier_Pass");
+        MockVerify context = new("JsonVerifier_Pass");
         string actualJson = context.ReadSourceFile(".json");
 
         // Act
@@ -44,7 +45,7 @@ internal sealed class VerifyTests
     public async Task Verify_String()
     {
         // Arrange
-        MockVerifyContext context = new("StringVerifier_Pass");
+        MockVerify context = new("StringVerifier_Pass");
         string actual = context.ReadSourceFile(".txt");
 
         // Act
