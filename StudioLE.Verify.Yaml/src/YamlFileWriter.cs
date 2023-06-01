@@ -13,10 +13,6 @@ public sealed class YamlFileWriter : IFileWriter<object>
         _serializer = serializer;
     }
 
-    public YamlFileWriter() : this(YamlHelpers.CreateSerializer())
-    {
-    }
-
     /// <inheritdoc/>
     public Task Write(string path, object value)
     {
