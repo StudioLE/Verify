@@ -4,7 +4,7 @@ using StudioLE.Core.System;
 using StudioLE.Verify.Files;
 using StudioLE.Verify.Tests.Mock;
 
-namespace StudioLE.Verify.Tests;
+namespace StudioLE.Verify.Tests.Files;
 
 internal sealed class FileVerifierTests
 {

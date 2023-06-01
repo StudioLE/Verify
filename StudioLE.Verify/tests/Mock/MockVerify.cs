@@ -1,6 +1,5 @@
 using NUnit.Framework;
 using StudioLE.Core.Results;
-using StudioLE.Verify.Abstractions;
 
 namespace StudioLE.Verify.Tests.Mock;
 
@@ -16,7 +15,7 @@ internal sealed class MockVerify : IVerify
         _directory = Path.GetFullPath(directory);
     }
 
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public string GetFilePath(string suffix)
     {
         string path = Path.Combine(_directory, _fileNamePrefix + suffix);

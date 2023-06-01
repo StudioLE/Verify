@@ -4,7 +4,7 @@ using StudioLE.Core.System;
 using StudioLE.Verify.Strings;
 using StudioLE.Verify.Tests.Mock;
 
-namespace StudioLE.Verify.Tests;
+namespace StudioLE.Verify.Tests.Strings;
 
 internal sealed class StringVerifierTests
 {
