@@ -14,6 +14,11 @@ public sealed class JsonVerifier : IVerifier<object>
         new StringEnumConverter(),
         new DoubleConverter(DecimalPlaces)
     };
+    private static readonly JsonSerializer _defaultSerializer = JsonSerializer.Create(new()
+    {
+        Formatting = Formatting.Indented,
+        Converters = Converters
+    });
 
     /// <inheritdoc />
     public string FileExtension => ".json";
@@ -22,5 +27,14 @@ public sealed class JsonVerifier : IVerifier<object>
     public IDiffer Differ => new StringDiffer();
 
     /// <inheritdoc/>
-    public IFileWriter<object> Writer => new JsonFileWriter();
+    public IFileWriter<object> Writer { get; }
+
+    public JsonVerifier(JsonSerializer serializer)
+    {
+        Writer = new JsonFileWriter(serializer);
+    }
+
+    public JsonVerifier() : this(_defaultSerializer)
+    {
+    }
 }

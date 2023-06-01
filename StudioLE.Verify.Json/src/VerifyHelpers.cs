@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using StudioLE.Core.Results;
 using StudioLE.Verify.Abstractions;
 
@@ -11,18 +12,22 @@ public static class VerifyHelpers
     /// <summary>
     /// Verify <paramref name="actual"/> as JSON.
     /// </summary>
-    public static async Task AsJson(this IVerify verify, object actual)
+    public static async Task AsJson(this IVerify verify, object actual, JsonSerializer? serializer = null)
     {
-        JsonVerifier verifier = new();
+        JsonVerifier verifier = serializer is null
+            ? new()
+            : new(serializer);
         IResult result = await verify.Execute(verifier, actual);
     }
 
     /// <summary>
     /// Verify <paramref name="actual"/> as JSON.
     /// </summary>
-    public static async Task AsJson(this IVerify verify, object expected, object actual)
+    public static async Task AsJson(this IVerify verify, object expected, object actual, JsonSerializer? serializer = null)
     {
-        JsonVerifier verifier = new();
+        JsonVerifier verifier = serializer is null
+            ? new()
+            : new(serializer);
         IResult result = await verify.Execute(verifier, expected, actual);
     }
 }
