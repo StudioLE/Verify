@@ -28,17 +28,11 @@ internal sealed class VerifyTests
     public async Task Verify_AsJson()
     {
         // Arrange
-        MockVerify context = new("JsonVerifier_Pass");
-        string actualJson = context.ReadSourceFile(".json");
-
-        // Act
-        BBox3[]? actual = JsonConvert.DeserializeObject<BBox3[]>(actualJson, JsonVerifier.Converters);
-        if (actual is null)
-            throw new("Failed to de-serialize.");
+        BBox3[] sample = SampleHelpers.GetValidSample();
 
         // Act
         // Assert
-        await _verify.AsJson(actual);
+        await _verify.AsJson(sample);
     }
 
     [Test]
