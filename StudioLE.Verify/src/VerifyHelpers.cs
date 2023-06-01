@@ -58,24 +58,6 @@ public static class VerifyHelpers
     }
 
     /// <summary>
-    /// Verify <paramref name="actual"/> as JSON.
-    /// </summary>
-    public static async Task AsJson(this IVerify verify, object actual)
-    {
-        JsonVerifier verifier = new();
-        IResult result = await verify.Execute(verifier, actual, ".json");
-    }
-
-    /// <summary>
-    /// Verify <paramref name="actual"/> as JSON.
-    /// </summary>
-    public static async Task AsJson(this IVerify verify, object expected, object actual)
-    {
-        JsonVerifier verifier = new();
-        IResult result = await verify.Execute(verifier, expected, actual, ".json");
-    }
-
-    /// <summary>
     /// Verify a string.
     /// </summary>
     public static async Task String(this IVerify verify, string actual)
