@@ -35,9 +35,12 @@ public class FileDiffer : IDiffer
     {
         string[] textFileExtensions =
         {
-            ".txt",
             ".json",
-            ".svg"
+            ".svg",
+            ".txt",
+            ".xml",
+            ".yaml",
+            ".yml"
         };
         string extension = Path.GetExtension(file.Path);
         return textFileExtensions.Contains(extension);
