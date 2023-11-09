@@ -8,8 +8,8 @@
   <Import Project="..\..\Global.props" />
 
   <ItemGroup>
-    <PackageReference Include="StudioLE.Core" Version="0.5.0-alpha.1" />
-    <PackageReference Include="YamlDotNet" Version="13.1.0" />
+    <PackageReference Include="StudioLE.Core" Version="0.5.0" />
+    <PackageReference Include="YamlDotNet" Version="13.7.1" />
   </ItemGroup>
 
   <ItemGroup>
