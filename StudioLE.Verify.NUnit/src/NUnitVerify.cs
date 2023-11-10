@@ -1,4 +1,4 @@
-﻿//
+//
 // The majority of the logic in VerifyContext is from Verify v16.7.0
 // https://github.com/VerifyTests/Verify
 //

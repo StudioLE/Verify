@@ -1,4 +1,4 @@
-﻿namespace StudioLE.Verify.Files;
+namespace StudioLE.Verify.Files;
 
 /// <summary>
 /// Compare the <typeparamref name="TValue"/>.

@@ -1,4 +1,4 @@
-﻿using StudioLE.Core.Results;
+using StudioLE.Core.Results;
 using StudioLE.Verify.Abstractions;
 
 namespace StudioLE.Verify;

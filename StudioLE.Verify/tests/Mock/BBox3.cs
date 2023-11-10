@@ -1,4 +1,4 @@
-﻿namespace StudioLE.Verify.Tests.Mock;
+namespace StudioLE.Verify.Tests.Mock;
 
 public class BBox3
 {
