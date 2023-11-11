@@ -11,7 +11,7 @@ namespace StudioLE.Verify;
 public static class VerifyHelpers
 {
     /// <summary>
-    /// Verify <paramref name="actual"/>.
+    /// Verify <paramref name="actual"/> matches the content of a verified file.
     /// </summary>
     public static async Task<IResult> Execute<T>(
         this IVerify verify,
@@ -21,6 +21,8 @@ public static class VerifyHelpers
         string receivedPath = verify.GetFilePath(".received" + verifier.FileExtension);
         string verifiedPath = verify.GetFilePath(".verified" + verifier.FileExtension);
         await verifier.Writer.Write(receivedPath, actual);
+        if (!System.IO.File.Exists(verifiedPath))
+            System.IO.File.Create(verifiedPath).Dispose();
         VerifyFile[] files =
         {
             new("Verified", verifiedPath),

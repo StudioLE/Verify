@@ -70,4 +70,15 @@ internal sealed class VerifyTests
         // Assert
         await _verify.String(expected, actual);
     }
+
+    [Test]
+    public async Task Verify_String_Unverified()
+    {
+        // Arrange
+        string actual = string.Empty;
+
+        // Act
+        // Assert
+        await _verify.String(actual);
+    }
 }
