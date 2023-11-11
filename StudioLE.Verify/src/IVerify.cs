@@ -13,5 +13,5 @@ public interface IVerify
     /// <summary>
     /// Process the result after verification.
     /// </summary>
-    public void OnResult(IResult result, string actualPath, string expectedPath);
+    public void OnResult(IResult result, string expectedPath, string actualPath);
 }

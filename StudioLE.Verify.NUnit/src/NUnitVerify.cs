@@ -32,14 +32,14 @@ public class NUnitVerify : IVerify
     }
 
     /// <inheritdoc/>
-    public void OnResult(IResult result, string actualPath, string expectedPath)
+    public void OnResult(IResult result, string expectedPath, string actualPath)
     {
         if (result is Success)
             return;
         ITest test = GetTest(TestContext.CurrentContext);
         Assembly testAssembly = test.TypeInfo?.Type.Assembly ?? throw new("Failed to get assembly");
         if (testAssembly.IsDebugBuild())
-            DiffRunner.LaunchAsync(actualPath, expectedPath);
+            DiffRunner.LaunchAsync(expectedPath, actualPath);
         Assert.Fail(result.Errors.Prepend("Actual results did not match the verified results:").Join());
     }
 

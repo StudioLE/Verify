@@ -29,7 +29,7 @@ public static class VerifyHelpers
             new("Received", receivedPath)
         };
         IResult result = await verifier.Differ.Execute(files);
-        verify.OnResult(result, receivedPath, verifiedPath);
+        verify.OnResult(result, verifiedPath, receivedPath);
         return result;
     }
 
@@ -52,7 +52,7 @@ public static class VerifyHelpers
             new("Actual", actualPath)
         };
         IResult result = await verifier.Differ.Execute(files);
-        verify.OnResult(result, actualPath, expectedPath);
+        verify.OnResult(result, expectedPath, actualPath);
         return result;
     }
 
