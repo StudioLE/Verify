@@ -1,16 +1,12 @@
 using DiffEngine;
 using NUnit.Framework;
 using StudioLE.Verify.NUnit;
-using StudioLE.Verify.Tests.Mock;
 
 namespace StudioLE.Verify.Tests.Tools;
 
 internal sealed class DiffToolsTests
 {
-    private readonly IVerify _verify = new NUnitVerify
-    {
-        UseAdditionalTools = false
-    };
+    private readonly IVerify _verify = new NUnitVerify();
 
     [TestCase("BeyondCompare")]
     [TestCase("Rider")]
