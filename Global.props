@@ -28,14 +28,14 @@
       </PropertyGroup>
 
       <ItemGroup>
-        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All"/>
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All"/>
       </ItemGroup>
     </When>
 
     <!-- If test library -->
     <When Condition="'$(OutputType)' == 'Library' AND $(MSBuildProjectName.EndsWith('.Tests'))">
       <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
       </PropertyGroup>
     </When>
   </Choose>

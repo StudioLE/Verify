@@ -8,7 +8,7 @@
   <Import Project="..\..\Global.props" />
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
     <PackageReference Include="StudioLE.Extensions.System" Version="0.8.0" />
     <PackageReference Include="StudioLE.Patterns.Abstractions" Version="0.8.0" />
     <PackageReference Include="StudioLE.Results" Version="0.8.0" />
