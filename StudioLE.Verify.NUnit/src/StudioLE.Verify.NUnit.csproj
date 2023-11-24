@@ -8,7 +8,7 @@
   <Import Project="..\..\Global.props" />
 
   <ItemGroup>
-    <PackageReference Include="DiffEngine" Version="12.4.1" />
+    <PackageReference Include="DiffEngine" Version="13.0.1" />
     <PackageReference Include="NUnit" Version="3.14.0" />
     <PackageReference Include="NUnit.Engine" Version="3.16.3" />
   </ItemGroup>
