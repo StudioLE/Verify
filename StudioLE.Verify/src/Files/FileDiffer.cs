@@ -1,5 +1,5 @@
 using System.Security.Cryptography;
-using StudioLE.Core.Results;
+using StudioLE.Results;
 using StudioLE.Verify.Abstractions;
 using StudioLE.Verify.Strings;
 

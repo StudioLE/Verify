@@ -1,5 +1,5 @@
-using StudioLE.Core.Patterns;
-using StudioLE.Core.Results;
+using StudioLE.Patterns;
+using StudioLE.Results;
 
 namespace StudioLE.Verify.Abstractions;
 

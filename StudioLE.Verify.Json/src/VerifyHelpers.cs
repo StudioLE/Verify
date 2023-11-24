@@ -1,5 +1,5 @@
 using Newtonsoft.Json;
-using StudioLE.Core.Results;
+using StudioLE.Results;
 using StudioLE.Verify.Abstractions;
 
 namespace StudioLE.Verify.Json;

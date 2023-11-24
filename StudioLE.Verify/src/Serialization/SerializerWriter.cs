@@ -1,4 +1,4 @@
-using StudioLE.Core.Serialization;
+using StudioLE.Serialization;
 using StudioLE.Verify.Abstractions;
 using StudioLE.Verify.Strings;
 

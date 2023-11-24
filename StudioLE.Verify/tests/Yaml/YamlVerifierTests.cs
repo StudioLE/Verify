@@ -1,6 +1,6 @@
 using NUnit.Framework;
-using StudioLE.Core.Results;
-using StudioLE.Core.System;
+using StudioLE.Extensions.System;
+using StudioLE.Results;
 using StudioLE.Verify.Tests.Mock;
 using StudioLE.Verify.Yaml;
 

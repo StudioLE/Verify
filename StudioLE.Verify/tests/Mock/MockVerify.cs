@@ -1,5 +1,5 @@
 using NUnit.Framework;
-using StudioLE.Core.Results;
+using StudioLE.Results;
 
 namespace StudioLE.Verify.Tests.Mock;
 

@@ -1,4 +1,4 @@
-using StudioLE.Core.Results;
+using StudioLE.Results;
 using StudioLE.Verify.Abstractions;
 using StudioLE.Verify.Files;
 using StudioLE.Verify.Strings;

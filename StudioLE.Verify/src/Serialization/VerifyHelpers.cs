@@ -1,5 +1,5 @@
-using StudioLE.Core.Results;
-using StudioLE.Core.Serialization;
+using StudioLE.Results;
+using StudioLE.Serialization;
 using StudioLE.Verify.Abstractions;
 
 namespace StudioLE.Verify.Serialization;

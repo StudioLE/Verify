@@ -11,8 +11,9 @@ using DiffEngine;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using NUnit.Framework.Internal;
-using StudioLE.Core.Results;
-using StudioLE.Core.System;
+using StudioLE.Extensions.System;
+using StudioLE.Extensions.System.Reflection;
+using StudioLE.Results;
 
 namespace StudioLE.Verify.NUnit;
 
