@@ -1,4 +1,4 @@
-using StudioLE.Results;
+using StudioLE.Diagnostics;
 using StudioLE.Verify.Abstractions;
 using YamlDotNet.Serialization;
 
@@ -12,20 +12,22 @@ public static class VerifyHelpers
     /// <summary>
     /// Verify <paramref name="actual"/> as YAML.
     /// </summary>
-    public static async Task AsYaml(this IVerify verify, object actual, ISerializer? serializer = null)
+    public static async Task VerifyAsYaml(this IContext context, object actual, ISerializer? serializer = null)
     {
         YamlVerifier verifier = serializer is null
             ? new()
             : new(serializer);
-        IResult result = await verify.Execute(verifier, actual);
+        await verifier.Execute(context, actual);
     }
 
     /// <summary>
     /// Verify <paramref name="actual"/> as YAML.
     /// </summary>
-    public static async Task AsYaml(this IVerify verify, object expected, object actual, ISerializer? serializer = null)
+    public static async Task VerifyAsYaml(this IContext context, object expected, object actual, ISerializer? serializer = null)
     {
-        YamlVerifier verifier = new();
-        IResult result = await verify.Execute(verifier, expected, actual);
+        YamlVerifier verifier = serializer is null
+            ? new()
+            : new(serializer);
+        await verifier.Execute(context, expected, actual);
     }
 }

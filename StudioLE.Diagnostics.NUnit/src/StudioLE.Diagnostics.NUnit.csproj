@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>A NUnit implementation of a diagnostic context.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\StudioLE.Diagnostics.Abstractions\src\StudioLE.Diagnostics.Abstractions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NUnit" Version="3.14.0" />
+  </ItemGroup>
+
+  <!-- Use consistent properties across all projects -->
+  <Import Project="..\..\Global.props"/>
+
+</Project>

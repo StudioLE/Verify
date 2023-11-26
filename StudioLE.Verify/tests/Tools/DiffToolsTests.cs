@@ -1,12 +1,13 @@
 using DiffEngine;
 using NUnit.Framework;
-using StudioLE.Verify.NUnit;
+using StudioLE.Diagnostics;
+using StudioLE.Diagnostics.NUnit;
 
 namespace StudioLE.Verify.Tests.Tools;
 
 internal sealed class DiffToolsTests
 {
-    private readonly IVerify _verify = new NUnitVerify();
+    private readonly IContext _context = new NUnitContext();
 
     [TestCase("BeyondCompare")]
     [TestCase("Rider")]
@@ -39,6 +40,6 @@ internal sealed class DiffToolsTests
 
         // Assert
         Assert.That(toolNames, Does.Contain(tool.ToString()));
-        await _verify.String(actual);
+        await _context.Verify(actual);
     }
 }

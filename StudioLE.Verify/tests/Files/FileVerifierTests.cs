@@ -1,6 +1,4 @@
 using NUnit.Framework;
-using StudioLE.Extensions.System;
-using StudioLE.Results;
 using StudioLE.Verify.Files;
 using StudioLE.Verify.Tests.Mock;
 
@@ -14,21 +12,18 @@ internal sealed class FileVerifierTests
     public async Task FileVerifier_IsValid(string fileExtension)
     {
         // Arrange
-        MockVerify verify = new("FileVerifier_Pass");
-        FileInfo file = verify.GetSourceFile(fileExtension);
+        MockContext context = new("FileVerifier_Pass");
+        FileInfo file = context.GetSourceFile(fileExtension);
         FileVerifier verifier = new()
         {
             FileExtension = fileExtension
         };
 
         // Act
-        IResult result = await verify.Execute(verifier, file);
-        if (result.Errors.Any())
-            Console.WriteLine(result.Errors.Join());
+        bool isVerified = await verifier.Execute(context, file);
 
         // Assert
-        Assert.That(result is Success, "Is Success");
-        Assert.That(result.Errors, Is.Empty, "Errors");
+        Assert.That(isVerified, Is.True);
     }
 
     [TestCase(".txt")]
@@ -37,20 +32,17 @@ internal sealed class FileVerifierTests
     public async Task FileVerifier_IsInvalid(string fileExtension)
     {
         // Arrange
-        MockVerify verify = new("FileVerifier_Fail");
-        FileInfo file = verify.GetSourceFile(fileExtension);
+        MockContext context = new("FileVerifier_Fail");
+        FileInfo file = context.GetSourceFile(fileExtension);
         FileVerifier verifier = new()
         {
             FileExtension = fileExtension
         };
 
         // Act
-        IResult result = await verify.Execute(verifier, file);
-        if (result.Errors.Any())
-            Console.WriteLine(result.Errors.Join());
+        bool isVerified = await verifier.Execute(context, file);
 
         // Assert
-        Assert.That(result is Success, Is.False, "Is Success");
-        Assert.That(result.Errors, Is.Not.Empty, "Errors");
+        Assert.That(isVerified, Is.False);
     }
 }

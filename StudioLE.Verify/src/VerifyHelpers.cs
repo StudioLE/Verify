@@ -1,4 +1,4 @@
-using StudioLE.Results;
+using StudioLE.Diagnostics;
 using StudioLE.Verify.Abstractions;
 using StudioLE.Verify.Files;
 using StudioLE.Verify.Strings;
@@ -11,78 +11,32 @@ namespace StudioLE.Verify;
 public static class VerifyHelpers
 {
     /// <summary>
-    /// Verify <paramref name="actual"/> matches the content of a verified file.
+    /// Verify a string.
     /// </summary>
-    public static async Task<IResult> Execute<T>(
-        this IVerify verify,
-        IVerifier<T> verifier,
-        T actual)
+    public static async Task Verify(this IContext context, string actual)
     {
-        string receivedPath = verify.GetFilePath(".received" + verifier.FileExtension);
-        string verifiedPath = verify.GetFilePath(".verified" + verifier.FileExtension);
-        await verifier.Writer.Write(receivedPath, actual);
-        if (!System.IO.File.Exists(verifiedPath))
-            System.IO.File.Create(verifiedPath).Dispose();
-        VerifyFile[] files =
-        {
-            new("Verified", verifiedPath),
-            new("Received", receivedPath)
-        };
-        IResult result = await verifier.Differ.Execute(files);
-        verify.OnResult(result, verifiedPath, receivedPath);
-        return result;
-    }
-
-    /// <summary>
-    /// Verify <paramref name="actual"/> matches <paramref name="expected"/>.
-    /// </summary>
-    public static async Task<IResult> Execute<T>(
-        this IVerify verify,
-        IVerifier<T> verifier,
-        T expected,
-        T actual)
-    {
-        string expectedPath = Path.GetTempFileName() + ".expected" + verifier.FileExtension;
-        string actualPath = Path.GetTempFileName() + ".actual" + verifier.FileExtension;
-        await verifier.Writer.Write(expectedPath, expected);
-        await verifier.Writer.Write(actualPath, actual);
-        VerifyFile[] files =
-        {
-            new("Expected", expectedPath),
-            new("Actual", actualPath)
-        };
-        IResult result = await verifier.Differ.Execute(files);
-        verify.OnResult(result, expectedPath, actualPath);
-        return result;
+        StringVerifier verifier = new();
+        await verifier.Execute(context, actual);
     }
 
     /// <summary>
     /// Verify a string.
     /// </summary>
-    public static async Task String(this IVerify verify, string actual)
+    public static async Task Verify(this IContext context, string expected, string actual)
     {
         StringVerifier verifier = new();
-        IResult result = await verify.Execute(verifier, actual);
-    }
-
-    /// <summary>
-    /// Verify a string.
-    /// </summary>
-    public static async Task String(this IVerify verify, string expected, string actual)
-    {
-        StringVerifier verifier = new();
-        IResult result = await verify.Execute(verifier, expected, actual);
+        await verifier.Execute(context, expected, actual);
     }
 
     /// <summary>
     /// Verify a file.
     /// </summary>
-    public static async Task File(this IVerify verify, FileInfo actual)
+    public static async Task Verify(this IContext context, FileInfo actual)
     {
         FileVerifier verifier = new()
         {
             FileExtension = actual.Extension
         };
-        IResult result = await verify.Execute(verifier, actual);
+        await verifier.Execute(context, actual);
     }
 }

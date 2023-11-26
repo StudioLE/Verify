@@ -1,32 +1,18 @@
 using NUnit.Framework;
-using StudioLE.Results;
+using StudioLE.Diagnostics;
 
 namespace StudioLE.Verify.Tests.Mock;
 
-internal sealed class MockVerify : IVerify
+internal sealed class MockContext : IContext
 {
     private readonly string _fileNamePrefix;
     private readonly string _directory;
 
-    public MockVerify(string fileNamePrefix)
+    public MockContext(string fileNamePrefix)
     {
         _fileNamePrefix = fileNamePrefix;
         string directory = Path.Combine(TestContext.CurrentContext.TestDirectory, "..", "..", "..", "Verify");
         _directory = Path.GetFullPath(directory);
-    }
-
-    /// <inheritdoc/>
-    public string GetFilePath(string suffix)
-    {
-        string path = Path.Combine(_directory, _fileNamePrefix + suffix);
-        return path;
-    }
-
-    /// <inheritdoc/>
-    public void OnResult(IResult result, string actualPath, string expectedPath)
-    {
-        // if (AssemblyHelpers.IsDebugBuild())
-        //     DiffRunner.LaunchAsync(receivedFile.FullName, verifiedFile.FullName);
     }
 
     internal FileInfo GetSourceFile(string fileExtension)
@@ -40,5 +26,41 @@ internal sealed class MockVerify : IVerify
         if (!sourceFile.Exists)
             throw new FileNotFoundException("Source file was not found: " + sourceFile.FullName);
         return File.ReadAllText(sourceFile.FullName);
+    }
+
+    /// <inheritdoc />
+    public string GetShortName()
+    {
+        throw new NotImplementedException();
+    }
+
+    /// <inheritdoc />
+    public string GetLongName()
+    {
+        throw new NotImplementedException();
+    }
+
+    /// <inheritdoc />
+    public string GetDescription()
+    {
+        throw new NotImplementedException();
+    }
+
+    /// <inheritdoc />
+    public string GetEscapedName()
+    {
+        return _fileNamePrefix;
+    }
+
+    /// <inheritdoc />
+    public Metadata GetMetadata()
+    {
+        throw new NotImplementedException();
+    }
+
+    /// <inheritdoc />
+    public void OnFailure(string message)
+    {
+        Console.WriteLine(message);
     }
 }

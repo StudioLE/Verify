@@ -8,11 +8,16 @@
   <Import Project="..\..\Global.props" />
 
   <ItemGroup>
+    <PackageReference Include="DiffEngine" Version="13.0.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
     <PackageReference Include="StudioLE.Extensions.System" Version="0.8.0" />
     <PackageReference Include="StudioLE.Patterns.Abstractions" Version="0.8.0" />
     <PackageReference Include="StudioLE.Results" Version="0.8.0" />
     <PackageReference Include="StudioLE.Serialization.Abstractions" Version="0.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\StudioLE.Diagnostics.Abstractions\src\StudioLE.Diagnostics.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

@@ -4,8 +4,8 @@
   <Import Project="..\..\Global.props" />
 
   <ItemGroup>
+    <ProjectReference Include="..\..\StudioLE.Diagnostics.NUnit\src\StudioLE.Diagnostics.NUnit.csproj" />
     <ProjectReference Include="..\..\StudioLE.Verify.Json\src\StudioLE.Verify.Json.csproj" />
-    <ProjectReference Include="..\..\StudioLE.Verify.NUnit\src\StudioLE.Verify.NUnit.csproj" />
     <ProjectReference Include="..\..\StudioLE.Verify.Yaml\src\StudioLE.Verify.Yaml.csproj" />
     <ProjectReference Include="..\src\StudioLE.Verify.csproj" />
   </ItemGroup>
@@ -18,6 +18,13 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Verify\VerifyTests.Verify_String_Unverified_.verified.txt" />
+    <None Remove="Verify\VerifyTests.Verify_String_.verified.txt" />
+    <None Remove="Verify\VerifyTests.Verify_AsYaml_.verified.yaml" />
+    <None Remove="Verify\VerifyTests.Verify_AsJson_.verified.json" />
   </ItemGroup>
 
 </Project>

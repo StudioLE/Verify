@@ -1,5 +1,4 @@
 using System.Security.Cryptography;
-using StudioLE.Results;
 using StudioLE.Verify.Abstractions;
 using StudioLE.Verify.Strings;
 
@@ -8,7 +7,7 @@ namespace StudioLE.Verify.Files;
 public class FileDiffer : IDiffer
 {
     /// <inheritdoc />
-    public async Task<IResult> Execute(IReadOnlyCollection<VerifyFile> files)
+    public async Task<IReadOnlyCollection<string>> Execute(IReadOnlyCollection<VerifyFile> files)
     {
         bool areTextFiles = files.All(IsTextFile);
         if (areTextFiles)
@@ -18,17 +17,14 @@ public class FileDiffer : IDiffer
         }
         string[] errors = CheckFilesExist(files);
         if (errors.Any())
-            return new Failure(errors);
-
+            return errors;
         errors = CheckValuesMatch(files, x => x.Length);
         if (errors.Any())
-            return new Failure("File sizes are different", errors);
-
+            return errors.Prepend("File sizes are different").ToArray();
         errors = CheckValuesMatch(files, GetFileHash);
         if (errors.Any())
-            return new Failure("File hashes are different", errors);
-
-        return new Success();
+            return errors.Prepend("File hashes are different").ToArray();
+        return Array.Empty<string>();
     }
 
     private static bool IsTextFile(VerifyFile file)

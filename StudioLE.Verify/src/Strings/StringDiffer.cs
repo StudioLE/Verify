@@ -1,4 +1,3 @@
-using StudioLE.Results;
 using StudioLE.Verify.Abstractions;
 
 namespace StudioLE.Verify.Strings;
@@ -6,7 +5,7 @@ namespace StudioLE.Verify.Strings;
 public class StringDiffer : IDiffer
 {
     /// <inheritdoc />
-    public async Task<IResult> Execute(IReadOnlyCollection<VerifyFile> files)
+    public async Task<IReadOnlyCollection<string>> Execute(IReadOnlyCollection<VerifyFile> files)
     {
         string[] errors = CheckFilesExist(files);
         if (!errors.Any())
@@ -15,9 +14,7 @@ public class StringDiffer : IDiffer
             errors = CheckNoLinesRemain(files);
         foreach (VerifyFile file in files)
             file.Dispose();
-        return errors.Any()
-            ? new Failure(errors)
-            : new Success();
+        return errors;
     }
 
     private static string[] CheckFilesExist(IReadOnlyCollection<VerifyFile> files)

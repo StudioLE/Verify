@@ -1,6 +1,7 @@
 using NUnit.Framework;
+using StudioLE.Diagnostics;
+using StudioLE.Diagnostics.NUnit;
 using StudioLE.Verify.Json;
-using StudioLE.Verify.NUnit;
 using StudioLE.Verify.Tests.Mock;
 using StudioLE.Verify.Yaml;
 
@@ -8,7 +9,7 @@ namespace StudioLE.Verify.Tests;
 
 internal sealed class VerifyTests
 {
-    private readonly IVerify _verify = new NUnitVerify();
+    private readonly IContext _context = new NUnitContext();
 
     [TestCase(".txt")]
     [TestCase(".pdf")]
@@ -16,12 +17,12 @@ internal sealed class VerifyTests
     public async Task Verify_File(string fileExtension)
     {
         // Arrange
-        MockVerify context = new("FileVerifier_Pass");
+        MockContext context = new("FileVerifier_Pass");
         FileInfo file = context.GetSourceFile(fileExtension);
 
         // Act
         // Assert
-        await _verify.File(file);
+        await _context.Verify(file);
     }
 
     [Test]
@@ -32,7 +33,7 @@ internal sealed class VerifyTests
 
         // Act
         // Assert
-        await _verify.AsJson(sample);
+        await _context.VerifyAsJson(sample);
     }
 
     [Test]
@@ -43,19 +44,19 @@ internal sealed class VerifyTests
 
         // Act
         // Assert
-        await _verify.AsYaml(sample);
+        await _context.VerifyAsYaml(sample);
     }
 
     [Test]
     public async Task Verify_String()
     {
         // Arrange
-        MockVerify context = new("StringVerifier_Pass");
+        MockContext context = new("StringVerifier_Pass");
         string actual = context.ReadSourceFile(".txt");
 
         // Act
         // Assert
-        await _verify.String(actual);
+        await _context.Verify(actual);
     }
 
     [Test]
@@ -68,7 +69,7 @@ internal sealed class VerifyTests
 
         // Act
         // Assert
-        await _verify.String(expected, actual);
+        await _context.Verify(expected, actual);
     }
 
     [Test]
@@ -79,6 +80,6 @@ internal sealed class VerifyTests
 
         // Act
         // Assert
-        await _verify.String(actual);
+        await _context.Verify(actual);
     }
 }

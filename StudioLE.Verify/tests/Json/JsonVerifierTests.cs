@@ -1,6 +1,4 @@
 using NUnit.Framework;
-using StudioLE.Extensions.System;
-using StudioLE.Results;
 using StudioLE.Verify.Json;
 using StudioLE.Verify.Tests.Mock;
 
@@ -13,17 +11,14 @@ internal sealed class JsonVerifierTests
     {
         // Arrange
         BBox3[] actual = SampleHelpers.GetValidSample();
-        MockVerify verify = new("JsonVerifier_Pass");
+        MockContext context = new("JsonVerifier_Pass");
         JsonVerifier verifier = new();
 
         // Act
-        IResult result = await verify.Execute(verifier, actual);
-        if (result.Errors.Any())
-            Console.WriteLine(result.Errors.Join());
+        bool isVerified = await verifier.Execute(context, actual);
 
         // Assert
-        Assert.That(result is Success, "Is Success");
-        Assert.That(result.Errors, Is.Empty, "Errors");
+        Assert.That(isVerified, Is.True);
     }
 
     [Test]
@@ -31,16 +26,13 @@ internal sealed class JsonVerifierTests
     {
         // Arrange
         BBox3[] actual = SampleHelpers.GetInvalidSample();
-        MockVerify verify = new("JsonVerifier_Fail");
+        MockContext context = new("JsonVerifier_Fail");
         JsonVerifier verifier = new();
 
         // Act
-        IResult result = await verify.Execute(verifier, actual);
-        if (result.Errors.Any())
-            Console.WriteLine(result.Errors.Join());
+        bool isVerified = await verifier.Execute(context, actual);
 
         // Assert
-        Assert.That(result is Success, Is.False, "Is Success");
-        Assert.That(result.Errors, Is.Not.Empty, "Errors");
+        Assert.That(isVerified, Is.False);
     }
 }
