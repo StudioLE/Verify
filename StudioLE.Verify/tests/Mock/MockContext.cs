@@ -31,19 +31,19 @@ internal sealed class MockContext : IContext
     /// <inheritdoc />
     public string GetShortName()
     {
-        throw new NotImplementedException();
+        throw new NotSupportedException();
     }
 
     /// <inheritdoc />
     public string GetLongName()
     {
-        throw new NotImplementedException();
+        throw new NotSupportedException();
     }
 
     /// <inheritdoc />
     public string GetDescription()
     {
-        throw new NotImplementedException();
+        throw new NotSupportedException();
     }
 
     /// <inheritdoc />
@@ -55,7 +55,7 @@ internal sealed class MockContext : IContext
     /// <inheritdoc />
     public Metadata GetMetadata()
     {
-        throw new NotImplementedException();
+        throw new NotSupportedException();
     }
 
     /// <inheritdoc />

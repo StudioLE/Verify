@@ -36,6 +36,6 @@ internal class DoubleConverter : JsonConverter
     /// <inheritdoc/>
     public override object ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
     {
-        throw new NotImplementedException();
+        throw new NotSupportedException();
     }
 }
