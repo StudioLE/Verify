@@ -8,6 +8,9 @@ internal sealed class MockContext : IContext
     private readonly string _fileNamePrefix;
     private readonly string _directory;
 
+    /// <inheritdoc />
+    public bool IsDebugBuild { get; } = true;
+
     public MockContext(string fileNamePrefix)
     {
         _fileNamePrefix = fileNamePrefix;

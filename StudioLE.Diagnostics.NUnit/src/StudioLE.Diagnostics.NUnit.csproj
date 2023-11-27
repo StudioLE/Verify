@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="NUnit" Version="3.14.0" />
+    <PackageReference Include="StudioLE.Extensions.System" Version="0.9.0" />
   </ItemGroup>
 
   <!-- Use consistent properties across all projects -->

@@ -1,6 +1,7 @@
 using System.Reflection;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
+using StudioLE.Extensions.System.Reflection;
 
 namespace StudioLE.Diagnostics.NUnit;
 
@@ -10,6 +11,12 @@ public class NUnitContext : IContext
     private static string _typeName = null!;
     private static string _methodName = null!;
     private static Dictionary<string, object?> _parameterDictionary = null!;
+
+    /// <inheritdoc />
+    public bool IsDebugBuild { get; } = AssemblyHelpers
+        .GetCallingAssemblies()
+        .ElementAt(1)
+        .IsDebugBuild();
 
     private void UpdateIfRequired()
     {

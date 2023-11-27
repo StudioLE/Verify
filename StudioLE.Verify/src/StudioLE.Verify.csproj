@@ -10,7 +10,6 @@
   <ItemGroup>
     <PackageReference Include="DiffEngine" Version="13.0.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
-    <PackageReference Include="StudioLE.Extensions.System" Version="0.9.0" />
     <PackageReference Include="StudioLE.Patterns.Abstractions" Version="0.9.0" />
     <PackageReference Include="StudioLE.Serialization.Abstractions" Version="0.9.0" />
   </ItemGroup>

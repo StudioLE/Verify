@@ -1,7 +1,5 @@
-using System.Reflection;
 using DiffEngine;
 using StudioLE.Diagnostics;
-using StudioLE.Extensions.System.Reflection;
 using StudioLE.Verify.Abstractions;
 
 namespace StudioLE.Verify;
@@ -32,7 +30,7 @@ public static class VerifierHelpers
         IReadOnlyCollection<string> errors = await verifier.Differ.Execute(files);
         if (!errors.Any())
             return true;
-        await Diff(verifiedPath, receivedPath);
+        await Diff(context, verifiedPath, receivedPath);
         string message = string.Join(Environment.NewLine, errors.Prepend("Actual results did not match the verified results:"));
         context.OnFailure(message);
         return false;
@@ -59,7 +57,7 @@ public static class VerifierHelpers
         IReadOnlyCollection<string> errors = await verifier.Differ.Execute(files);
         if (!errors.Any())
             return true;
-        await Diff(expectedPath, actualPath);
+        await Diff(context, expectedPath, actualPath);
         string message = string.Join(Environment.NewLine, errors.Prepend("Actual results did not match the expected results:"));
         context.OnFailure(message);
         return false;
@@ -79,7 +77,7 @@ public static class VerifierHelpers
         return Path.Combine(directory, fileName);
     }
 
-    private static async Task Diff(string expectedPath, string actualPath)
+    private static async Task Diff(IContext context, string expectedPath, string actualPath)
     {
         DiffTool[] tools =
         {
@@ -107,10 +105,7 @@ public static class VerifierHelpers
             DiffTool.VisualStudio
         };
         DiffTools.UseOrder(tools);
-        Assembly testAssembly = AssemblyHelpers
-            .GetCallingAssemblies()
-            .ElementAt(10);
-        if (testAssembly.IsDebugBuild())
+        if (context.IsDebugBuild)
             await DiffRunner.LaunchAsync(expectedPath, actualPath);
     }
 }

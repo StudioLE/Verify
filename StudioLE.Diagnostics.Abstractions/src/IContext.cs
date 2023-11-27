@@ -6,6 +6,11 @@ namespace StudioLE.Diagnostics;
 public interface IContext
 {
     /// <summary>
+    /// Is the diagnostic context a debug build.
+    /// </summary>
+    public bool IsDebugBuild { get; }
+
+    /// <summary>
     /// The short name of the diagnostic context.
     /// </summary>
     public string GetShortName();
