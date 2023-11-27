@@ -32,13 +32,9 @@ public static class VerifierHelpers
         IReadOnlyCollection<string> errors = await verifier.Differ.Execute(files);
         if (!errors.Any())
             return true;
+        await Diff(verifiedPath, receivedPath);
         string message = string.Join(Environment.NewLine, errors.Prepend("Actual results did not match the verified results:"));
         context.OnFailure(message);
-        Assembly testAssembly = AssemblyHelpers
-            .GetCallingAssemblies()
-            .ElementAt(1);
-        if (testAssembly.IsDebugBuild())
-            await DiffRunner.LaunchAsync(verifiedPath, receivedPath);
         return false;
     }
 
@@ -63,13 +59,9 @@ public static class VerifierHelpers
         IReadOnlyCollection<string> errors = await verifier.Differ.Execute(files);
         if (!errors.Any())
             return true;
+        await Diff(expectedPath, actualPath);
         string message = string.Join(Environment.NewLine, errors.Prepend("Actual results did not match the expected results:"));
         context.OnFailure(message);
-        Assembly testAssembly = AssemblyHelpers
-            .GetCallingAssemblies()
-            .ElementAt(1);
-        if (testAssembly.IsDebugBuild())
-            await DiffRunner.LaunchAsync(expectedPath, actualPath);
         return false;
     }
 
@@ -85,5 +77,40 @@ public static class VerifierHelpers
         string directory = Path.GetFullPath(Path.Combine("..", "..", "..", "Verify"));
         string fileName = context.GetEscapedName() + suffix + verifier.FileExtension;
         return Path.Combine(directory, fileName);
+    }
+
+    private static async Task Diff(string expectedPath, string actualPath)
+    {
+        DiffTool[] tools =
+        {
+            DiffTool.Rider,
+            DiffTool.BeyondCompare,
+            DiffTool.P4Merge,
+            DiffTool.Kaleidoscope,
+            DiffTool.DeltaWalker,
+            DiffTool.WinMerge,
+            DiffTool.TortoiseMerge,
+            DiffTool.TortoiseGitMerge,
+            DiffTool.TortoiseGitIDiff,
+            DiffTool.TortoiseIDiff,
+            DiffTool.KDiff3,
+            DiffTool.TkDiff,
+            DiffTool.Guiffy,
+            DiffTool.ExamDiff,
+            DiffTool.Diffinity,
+            DiffTool.Vim,
+            DiffTool.Neovim,
+            DiffTool.AraxisMerge,
+            DiffTool.Meld,
+            DiffTool.SublimeMerge,
+            DiffTool.VisualStudioCode,
+            DiffTool.VisualStudio
+        };
+        DiffTools.UseOrder(tools);
+        Assembly testAssembly = AssemblyHelpers
+            .GetCallingAssemblies()
+            .ElementAt(10);
+        if (testAssembly.IsDebugBuild())
+            await DiffRunner.LaunchAsync(expectedPath, actualPath);
     }
 }
