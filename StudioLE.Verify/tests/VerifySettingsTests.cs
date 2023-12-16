@@ -14,7 +14,7 @@ internal sealed class VerifySettingsTests
     [TestCase(DiffTool.Rider)]
     [TestCase(DiffTool.VisualStudioCode)]
     [Explicit("Intentionally failing")]
-    public async Task VerifyHelpers_DiffTools(DiffTool tool)
+    public async Task VerifySettings_DiffTools(DiffTool tool)
     {
         // Arrange
         string expected = "Hello, world!";
@@ -29,7 +29,7 @@ internal sealed class VerifySettingsTests
 
     [Test]
     [Explicit("Accepts the received value")]
-    public async Task VerifyHelpers_AcceptReceived([Values]bool acceptReceived)
+    public async Task VerifySettings_AcceptReceived([Values]bool acceptReceived)
     {
         // Arrange
         BBox3[] actual = SampleHelpers.GetInvalidSample();
