@@ -34,7 +34,9 @@ public static class NUnitContextHelpers
         FieldInfo field = typeof(TestContext.TestAdapter)
                               .GetField("_test", BindingFlags.Instance | BindingFlags.NonPublic)
                           ?? throw new("Could not find field `_test` on TestContext.TestAdapter.");
-        Test test = (Test)field.GetValue(adapter);
+        object? testObj = field.GetValue(adapter);
+        if (testObj is not Test test)
+            throw new("Could not get test object from TestContext.TestAdapter.");
         return test;
     }
 
