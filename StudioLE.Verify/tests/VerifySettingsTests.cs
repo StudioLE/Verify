@@ -7,7 +7,7 @@ using StudioLE.Verify.Tests.Mock;
 
 namespace StudioLE.Verify.Tests;
 
-internal sealed class VerifyHelpersTests
+internal sealed class VerifySettingsTests
 {
     private readonly IContext _context = new NUnitContext();
 
@@ -21,7 +21,7 @@ internal sealed class VerifyHelpersTests
         string actual = "Hmm, this isn't correct.";
 
         // Act
-        VerifyHelpers.DiffTools = new[] { tool };
+        VerifySettings.DiffTools = new[] { tool };
 
         // Assert
         await _context.Verify(expected, actual);
@@ -37,7 +37,7 @@ internal sealed class VerifyHelpersTests
         JsonVerifier verifier = new();
 
         // Act
-        VerifyHelpers.AcceptReceived = acceptReceived;
+        VerifySettings.AcceptReceived = acceptReceived;
         bool isVerified = await verifier.Execute(context, actual);
 
         // Assert
