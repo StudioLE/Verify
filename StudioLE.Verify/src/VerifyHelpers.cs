@@ -40,6 +40,14 @@ public static class VerifyHelpers
     };
 
     /// <summary>
+    /// Should the received file be accepted as the verified file?
+    /// </summary>
+    /// <remarks>
+    /// Automatic acceptance revises the utility of verification from the automated test to the developer's action of committing the verified result.
+    /// </remarks>
+    public static bool AcceptReceived { get; set; } = false;
+
+    /// <summary>
     /// Verify a string.
     /// </summary>
     public static async Task Verify(this IContext context, string actual)

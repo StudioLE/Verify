@@ -33,6 +33,8 @@ public static class VerifierHelpers
         await Diff(context, verifiedPath, receivedPath);
         string message = string.Join(Environment.NewLine, errors.Prepend("Actual results did not match the verified results:"));
         context.OnFailure(message);
+        if(VerifyHelpers.AcceptReceived)
+            File.Copy(receivedPath, verifiedPath, true);
         return false;
     }
 
