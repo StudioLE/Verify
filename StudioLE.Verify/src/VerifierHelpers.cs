@@ -79,32 +79,7 @@ public static class VerifierHelpers
 
     private static async Task Diff(IContext context, string expectedPath, string actualPath)
     {
-        DiffTool[] tools =
-        {
-            DiffTool.Rider,
-            DiffTool.BeyondCompare,
-            DiffTool.P4Merge,
-            DiffTool.Kaleidoscope,
-            DiffTool.DeltaWalker,
-            DiffTool.WinMerge,
-            DiffTool.TortoiseMerge,
-            DiffTool.TortoiseGitMerge,
-            DiffTool.TortoiseGitIDiff,
-            DiffTool.TortoiseIDiff,
-            DiffTool.KDiff3,
-            DiffTool.TkDiff,
-            DiffTool.Guiffy,
-            DiffTool.ExamDiff,
-            DiffTool.Diffinity,
-            DiffTool.Vim,
-            DiffTool.Neovim,
-            DiffTool.AraxisMerge,
-            DiffTool.Meld,
-            DiffTool.SublimeMerge,
-            DiffTool.VisualStudioCode,
-            DiffTool.VisualStudio
-        };
-        DiffTools.UseOrder(tools);
+        DiffTools.UseOrder(VerifyHelpers.DiffTools);
         if (context.IsDebugBuild)
             await DiffRunner.LaunchAsync(expectedPath, actualPath);
     }

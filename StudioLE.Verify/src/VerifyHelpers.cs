@@ -1,3 +1,4 @@
+using DiffEngine;
 using StudioLE.Diagnostics;
 using StudioLE.Verify.Abstractions;
 using StudioLE.Verify.Files;
@@ -10,6 +11,34 @@ namespace StudioLE.Verify;
 /// </summary>
 public static class VerifyHelpers
 {
+    /// <summary>
+    /// The diff tools, in order of preference, to use when verifying.
+    /// </summary>
+    public static DiffTool[] DiffTools { get; set; } = {
+        DiffTool.VisualStudioCode,
+        DiffTool.Rider,
+        DiffTool.BeyondCompare,
+        DiffTool.P4Merge,
+        DiffTool.Kaleidoscope,
+        DiffTool.DeltaWalker,
+        DiffTool.WinMerge,
+        DiffTool.TortoiseMerge,
+        DiffTool.TortoiseGitMerge,
+        DiffTool.TortoiseGitIDiff,
+        DiffTool.TortoiseIDiff,
+        DiffTool.KDiff3,
+        DiffTool.TkDiff,
+        DiffTool.Guiffy,
+        DiffTool.ExamDiff,
+        DiffTool.Diffinity,
+        DiffTool.Vim,
+        DiffTool.Neovim,
+        DiffTool.AraxisMerge,
+        DiffTool.Meld,
+        DiffTool.SublimeMerge,
+        DiffTool.VisualStudio
+    };
+
     /// <summary>
     /// Verify a string.
     /// </summary>
