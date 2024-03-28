@@ -9,9 +9,10 @@ public sealed class YamlVerifier : IVerifier<object>
 {
     private static readonly ISerializer _defaultSerializer = new SerializerBuilder()
         .DisableAliases()
+        .WithTypeConverter(new YamlStringConverter())
         .Build();
 
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public string FileExtension => ".yaml";
 
     /// <inheritdoc/>
@@ -20,11 +21,17 @@ public sealed class YamlVerifier : IVerifier<object>
     /// <inheritdoc/>
     public IFileWriter<object> Writer { get; }
 
+    /// <summary>
+    /// DI constructor for <see cref="YamlVerifier"/>.
+    /// </summary>
     public YamlVerifier(ISerializer serializer)
     {
         Writer = new YamlFileWriter(serializer);
     }
 
+    /// <summary>
+    /// Creates a new instance of <see cref="YamlVerifier"/>.
+    /// </summary>
     public YamlVerifier() : this(_defaultSerializer)
     {
     }
