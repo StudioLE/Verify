@@ -2,42 +2,61 @@
 
   <PropertyGroup>
     <Authors>StudioLE</Authors>
-    <Copyright>Copyright © Laurence Elsdon 2023</Copyright>
+    <Copyright>Copyright © Laurence Elsdon 2023-2024</Copyright>
     <PackageProjectUrl>https://github.com/StudioLE/Verify</PackageProjectUrl>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>verify test helper helpers nunit testing tdd</PackageTags>
+    <PackageLicenseExpression>AGPL-3.0-only</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <PropertyGroup>
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
-    <!--    <GenerateDocumentationFile>true</GenerateDocumentationFile>-->
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Include="../../README.md" Pack="true" PackagePath="\" Visible="false"/>
+  <PropertyGroup>
+    <RepositoryReadmeFilePath>../../README.md</RepositoryReadmeFilePath>
+    <ProjectReadmeFilePath>README.md</ProjectReadmeFilePath>
+    <PackageReadMeFile Condition="Exists('$(RepositoryReadmeFilePath)') OR Exists('$(ProjectReadmeFilePath)')">README.md</PackageReadMeFile>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <IsExecutable>false</IsExecutable>
+    <IsTestLibrary>false</IsTestLibrary>
+    <IsLibrary>false</IsLibrary>
+    <IsExecutable Condition="'$(OutputType)' == 'Exe'">true</IsExecutable>
+    <IsTestLibrary Condition="'$(OutputType)' == 'Library' AND $(MSBuildProjectName.EndsWith('.Tests'))">true</IsTestLibrary>
+    <IsLibrary Condition="'$(OutputType)' == 'Library' AND ! $(MSBuildProjectName.EndsWith('.Tests'))">true</IsLibrary>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(IsExecutable)">
+    <TargetFramework Condition="'$(TargetFramework)' == '' AND '$(TargetFrameworks)' == ''">net8.0</TargetFramework>
+    <PackAsTool>true</PackAsTool>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(IsTestLibrary)">
+    <TargetFramework Condition="'$(TargetFramework)' == '' AND '$(TargetFrameworks)' == ''">net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(IsLibrary)">
+    <TargetFramework Condition="'$(TargetFramework)' == '' AND '$(TargetFrameworks)' == ''">net6.0</TargetFramework>
+    <IsPackable>true</IsPackable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>CS1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup Condition="$(IsExecutable) OR $(IsLibrary)">
+    <PackageReference Include="Surveyor.BuildVersioning" Version="0.4.0" PrivateAssets="All" Condition="'$(CI)' == 'true'" />
   </ItemGroup>
 
-  <Choose>
-    <!-- If non-test library -->
-    <When Condition="'$(OutputType)' == 'Library' AND ! $(MSBuildProjectName.EndsWith('.Tests'))">
-      <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
-        <IsPackable>true</IsPackable>
-      </PropertyGroup>
+  <ItemGroup Condition="$(IsLibrary)">
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All"/>
+  </ItemGroup>
 
-      <ItemGroup>
-        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All"/>
-      </ItemGroup>
-    </When>
-
-    <!-- If test library -->
-    <When Condition="'$(OutputType)' == 'Library' AND $(MSBuildProjectName.EndsWith('.Tests'))">
-      <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
-      </PropertyGroup>
-    </When>
-  </Choose>
+  <ItemGroup Condition="$(IsLibrary) OR $(IsExecutable)">
+    <Content Condition="Exists('$(ProjectReadmeFilePath)')" Include="$(PackageReadmeFile)" Pack="true" PackagePath="/" />
+    <None Condition="Exists('$(RepositoryReadmeFilePath)') AND ! Exists('$(ProjectReadmeFilePath)')" Include="$(RepositoryReadmeFilePath)" Pack="true" PackagePath="/" Visible="false" />
+  </ItemGroup>
 
 </Project>
