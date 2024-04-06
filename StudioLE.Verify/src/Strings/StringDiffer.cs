@@ -41,10 +41,14 @@ public class StringDiffer : IDiffer
         return Array.Empty<string>();
     }
 
-    private static Task<string[]> ReadLinesAsync(IReadOnlyCollection<VerifyFile> files)
+    private static async Task<string[]> ReadLinesAsync(IReadOnlyCollection<VerifyFile> files)
     {
-        IEnumerable<Task<string>> tasks = files.Select(x => x.Reader.ReadLineAsync());
-        return Task.WhenAll(tasks);
+        IEnumerable<Task<string?>> tasks = files
+            .Select(x => x.Reader.ReadLineAsync());
+        string?[] all = await Task.WhenAll(tasks);
+        return all
+            .OfType<string>()
+            .ToArray();
     }
 
     private static bool AnyAreDifferent(IEnumerable<string> lines)

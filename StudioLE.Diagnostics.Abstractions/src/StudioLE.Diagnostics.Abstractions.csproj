@@ -3,6 +3,7 @@
   <PropertyGroup>
     <Description>An abstract implementation of a diagnostic context.</Description>
     <RootNamespace>StudioLE.Diagnostics</RootNamespace>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
   <!-- Use consistent properties across all projects -->

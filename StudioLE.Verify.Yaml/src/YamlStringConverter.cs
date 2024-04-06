@@ -49,7 +49,7 @@ internal class YamlStringConverter : IYamlTypeConverter
         if (string.IsNullOrEmpty(value))
             return false;
         char[] lineBreakCharacters = ['\r', '\n', '\x85', '\x2028', '\x2029'];
-        return value!.IndexOfAny(lineBreakCharacters) >= 0;
+        return value.IndexOfAny(lineBreakCharacters) >= 0;
     }
 
     private static Scalar CreateScalar(string value, ScalarStyle style)
