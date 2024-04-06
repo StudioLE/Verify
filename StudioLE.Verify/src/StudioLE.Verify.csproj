@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>Visualise and verify the results of Elements logic.</Description>
+    <Description>A library to verify the products of test logic. Whether it's a complex object, or obscure file type `StudioLE.Verify` can handle it.</Description>
   </PropertyGroup>
 
   <!-- Use consistent properties across all projects -->

@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>Visualise and verify the results of Elements logic.</Description>
+    <Description>A library providing extension methods for `StudioLE.Verify` to handle serializing objects to JSON.</Description>
   </PropertyGroup>
 
   <!-- Use consistent properties across all projects -->

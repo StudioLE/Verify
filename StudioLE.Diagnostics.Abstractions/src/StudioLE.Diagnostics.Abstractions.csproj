@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>An abstract implementation of a diagnostic context.</Description>
+    <Description>Abstractions for a standardized approach to access the test context.</Description>
     <RootNamespace>StudioLE.Diagnostics</RootNamespace>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>

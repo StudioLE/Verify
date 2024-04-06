@@ -1,8 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>A NUnit implementation of a diagnostic context.</Description>
+    <Description>A concrete implementation of `StudioLE.Diagnostics.Abstractions` for NUnit.</Description>
   </PropertyGroup>
+
+  <!-- Use consistent properties across all projects -->
+  <Import Project="..\..\Global.props"/>
 
   <ItemGroup>
     <ProjectReference Include="..\..\StudioLE.Diagnostics.Abstractions\src\StudioLE.Diagnostics.Abstractions.csproj" />
@@ -12,8 +15,5 @@
     <PackageReference Include="NUnit" Version="4.1.0" />
     <PackageReference Include="StudioLE.Extensions.System" Version="0.11.0" />
   </ItemGroup>
-
-  <!-- Use consistent properties across all projects -->
-  <Import Project="..\..\Global.props"/>
 
 </Project>
