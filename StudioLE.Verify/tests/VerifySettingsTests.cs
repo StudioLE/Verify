@@ -29,7 +29,7 @@ internal sealed class VerifySettingsTests
 
     [Test]
     [Explicit("Accepts the received value")]
-    public async Task VerifySettings_AcceptReceived([Values]bool acceptReceived)
+    public async Task VerifySettings_AcceptReceived([Values] bool acceptReceived)
     {
         // Arrange
         BBox3[] actual = SampleHelpers.GetInvalidSample();

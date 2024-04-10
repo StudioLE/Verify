@@ -1,4 +1,4 @@
-﻿using YamlDotNet.Core;
+using YamlDotNet.Core;
 using YamlDotNet.Core.Events;
 using YamlDotNet.Serialization;
 
@@ -35,7 +35,7 @@ internal class YamlStringConverter : IYamlTypeConverter
     {
         if (obj is not string value)
             throw new($"Failed to write YAML. Expected value to be a {typeof(string)}.");
-        if(ReplaceCRLFWithLF)
+        if (ReplaceCRLFWithLF)
             value = value.Replace("\r\n", "\n");
         ScalarStyle style = ScalarStyle.Any;
         if (IsMultiLineString(value))

@@ -12,7 +12,7 @@ internal sealed class NUnitContextTests
     }
 
     [Test]
-    public void NUnitContextTests_Execute([Range(1,2)] int intValue, [Values] Example enumValue)
+    public void NUnitContextTests_Execute([Range(1, 2)] int intValue, [Values] Example enumValue)
     {
         // Arrange
         NUnitContext context = new();

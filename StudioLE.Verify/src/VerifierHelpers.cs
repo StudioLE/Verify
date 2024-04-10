@@ -31,7 +31,7 @@ public static class VerifierHelpers
         if (!errors.Any())
             return true;
         await Diff(context, verifiedPath, receivedPath);
-        if(VerifySettings.AcceptReceived)
+        if (VerifySettings.AcceptReceived)
             File.Copy(receivedPath, verifiedPath, true);
         string message = string.Join(Environment.NewLine, errors.Prepend("Actual results did not match the verified results:"));
         context.OnFailure(message);

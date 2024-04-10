@@ -39,7 +39,7 @@ public class NUnitContext : IContext
     public string GetShortName()
     {
         UpdateIfRequired();
-        if(!_parameterDictionary.Any())
+        if (!_parameterDictionary.Any())
             return _methodName;
         string parameters = string.Join(", ", _parameterDictionary.Values);
         return $"{_methodName} ({parameters})";
