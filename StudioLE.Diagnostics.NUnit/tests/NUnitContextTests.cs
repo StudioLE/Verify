@@ -18,7 +18,7 @@ internal sealed class NUnitContextTests
         NUnitContext context = new();
 
         // Act
-        Metadata metadata = context.GetMetadata();
+        Metadata _ = context.GetMetadata();
         string shortName = context.GetShortName();
         string longName = context.GetLongName();
         string escapedName = context.GetEscapedName();
