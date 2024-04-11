@@ -28,7 +28,7 @@ public class StringDiffer : IDiffer
     private static async Task<string[]> CheckNoDistinctLines(IReadOnlyCollection<VerifyFile> files)
     {
         int lineNumber = 1;
-        while (files.Any(x => x.Reader.Peek() != -1))
+        while (files.All(x => x.Reader.Peek() != -1))
         {
             string[] lines = await ReadLinesAsync(files);
             if (AnyAreDifferent(lines))
