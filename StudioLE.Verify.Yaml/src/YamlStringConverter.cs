@@ -24,14 +24,14 @@ internal class YamlStringConverter : IYamlTypeConverter
     }
 
     /// <inheritdoc />
-    public object ReadYaml(IParser parser, Type type)
+    public object ReadYaml(IParser parser, Type type, ObjectDeserializer rootDeserializer)
     {
         Scalar scalar = parser.Consume<Scalar>();
         return scalar.Value;
     }
 
     /// <inheritdoc />
-    public void WriteYaml(IEmitter emitter, object? obj, Type type)
+    public void WriteYaml(IEmitter emitter, object? obj, Type type, ObjectSerializer serializer)
     {
         if (obj is not string value)
             throw new($"Failed to write YAML. Expected value to be a {typeof(string)}.");
